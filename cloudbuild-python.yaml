@@ -22,4 +22,3 @@ steps:
     - |-
       pip install -r requirements.txt
       coverage report --show-missing
-      sleep 100
