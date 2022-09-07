@@ -1,0 +1,28 @@
+steps:
+- id: Checkout hello-world repo
+  name: bash
+  entrypoint: bash
+  args:
+    - '-c'
+    - |-
+      git clone https://github.com/muhammad-asn/hello-world
+
+- id: Run Unit Test
+  name: python
+  dir: hello-world
+  entrypoint: bash
+  args: 
+    - '-c'
+    - |-
+      pip install -r requirements.txt
+      coverage run --module unittest  -v
+
+- id: Coverage Report
+  name: python
+  dir: hello-world
+  entrypoint: bash
+  args: 
+    - '-c'
+    - |-
+      pip install -r requirements.txt
+      coverage report --show-missing
