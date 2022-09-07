@@ -1,11 +1,7 @@
 steps:
 - id: Checkout hello-world repo
-  name: bash
-  entrypoint: bash
-  args:
-    - '-c'
-    - |-
-      git clone https://github.com/muhammad-asn/hello-world
+  name: gcr.io/cloud-builders/git
+  args: ['clone', 'https://github.com/muhammad-asn/hello-world']
 
 - id: Run Unit Test
   name: python
