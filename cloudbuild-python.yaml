@@ -1,7 +1,7 @@
 steps:
 - id: Checkout hello-world repo
   name: gcr.io/cloud-builders/git
-  args: ['clone', 'https://github.com/muhammad-asn/hello-world']
+  args: ['clone', '$_REPO']
 
 - id: Run Unit Test
   name: python
