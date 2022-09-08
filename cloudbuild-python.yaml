@@ -1,11 +1,11 @@
 steps:
-- id: Checkout hello-world repo
+- id: Checkout repo
   name: gcr.io/cloud-builders/git
   args: ['clone', '$_REPO']
 
 - id: Run Unit Test
   name: python
-  dir: hello-world
+  dir: $_DIRECTORY
   entrypoint: bash
   args: 
     - '-c'
@@ -15,7 +15,7 @@ steps:
 
 - id: Coverage Report
   name: python
-  dir: hello-world
+  dir: $_DIRECTORY
   entrypoint: bash
   args: 
     - '-c'
