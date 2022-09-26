@@ -3,22 +3,27 @@ steps:
   name: gcr.io/cloud-builders/git
   args: ['clone', '$_REPO']
 
-- id: Run Unit Test
-  name: python
+- id: Install Dependencies
+  name: python:3.8.10
   dir: $_DIRECTORY
-  entrypoint: bash
+  entrypoint: pip3
+  args: ["install", "-r", "requirements.txt", "--user"]
+
+- id: Run Unit Test
+  name: python:3.8.10
+  dir: $_DIRECTORY
+  entrypoint: python
   args: 
-    - '-c'
-    - |-
-      pip install -r requirements.txt
-      coverage run --module unittest  -v
+    - ["-m", "coverage", "run", "--module", "unittest", "-v"]
+  env:
+    - 'PYTHONPATH=/builder/home/.local/bin'
+
 
 - id: Coverage Report
-  name: python
+  name: python:3.8.10
   dir: $_DIRECTORY
-  entrypoint: bash
+  entrypoint: python
   args: 
-    - '-c'
-    - |-
-      pip install -r requirements.txt
-      coverage report --show-missing
+    - ["-m", "coverage", "report", "--show-missing"]
+  env:
+    - 'PYTHONPATH=/builder/home/.local/bin'
